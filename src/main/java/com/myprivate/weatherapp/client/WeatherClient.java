@@ -20,15 +20,18 @@ public class WeatherClient {
     @Value("${open.weather.map.api.key}")
     private String weatherApiKeyId;
 
-    public OpenWeatherDto getForecast(@RequestParam String city,String location){
+    public OpenWeatherDto getForecast(@RequestParam String city ,
+                                      @RequestParam(required = false) String location,
+                                      @RequestParam(defaultValue = "metric") String temperatureUnits){
 
         URI url = UriComponentsBuilder.fromHttpUrl("http://api.openweathermap.org/data/2.5/weather")
                 .queryParam("q",city,location)
-                .queryParam("wind.speed.unit","m/h")
+                .queryParam("units", temperatureUnits)
                 .queryParam("appid",weatherApiKeyId).build().encode().toUri();
 
         OpenWeatherDto response = restTemplate.getForObject(url,OpenWeatherDto.class);
-
+        response.setLocation(location);
+        response.setUnit(temperatureUnits);
         return response;
 
     }

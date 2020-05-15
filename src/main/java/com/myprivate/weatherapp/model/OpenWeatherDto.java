@@ -6,23 +6,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
+@Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OpenWeatherDto {
 
+    @JsonProperty("name")
+    private String city;
+    private String location;
+    private String unit;
     @JsonProperty("weather")
     private List<WeatherConditionsDto> weatherConditionsDto;
     @JsonProperty("main")
     private WeatherTempraturesDto weatherTempraturesDto;
     @JsonProperty("wind")
     private WeatherWindDto weatherWindDto;
-
-
 
 
 
