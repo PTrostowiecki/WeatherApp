@@ -50,4 +50,9 @@ public class OpenWeatherController {
         weatherRepository.deleteAll();
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "deletebyid")
+    public void deleteWeatherByIdFromDataBase(@RequestParam Long id ){
+        weatherRepository.deleteById(id);
+    }
+
 }
