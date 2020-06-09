@@ -1,15 +1,15 @@
 package com.myprivate.weatherapp.repository;
 
-import com.myprivate.weatherapp.model.OpenWeather;
+import com.myprivate.weatherapp.model.WeatherEntity;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface WeatherRepository  extends CrudRepository<OpenWeather,Long> {
+public interface WeatherRepository  extends CrudRepository<WeatherEntity,Long> {
 
     @Override
-    List<OpenWeather> findAll();
+    List<WeatherEntity> findAll();
 
     @Override
-    OpenWeather save(OpenWeather openWeather);
+    WeatherEntity save(WeatherEntity weatherEntity);
 }

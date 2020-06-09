@@ -15,12 +15,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class OpenWeatherDto {
+public class WeatherDto {
 
     @JsonProperty("name")
     private String city;
     private String location;
-    private String unit;
+    private String temperatureUnits;
     @JsonProperty("weather")
     private List<WeatherConditionsDto> weatherConditionsDto;
     @JsonProperty("main")

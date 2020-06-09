@@ -1,6 +1,6 @@
 package com.myprivate.weatherapp.service;
 
-import com.myprivate.weatherapp.model.OpenWeather;
+import com.myprivate.weatherapp.model.WeatherEntity;
 import com.myprivate.weatherapp.repository.WeatherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,19 +13,19 @@ public class DataBaseService {
     @Autowired
     private WeatherRepository repository;
 
-    public List<OpenWeather> getAllOpenWeathers(){
+    public List<WeatherEntity> getAllOpenWeathersEntity(){
         return repository.findAll();
     }
 
-    public OpenWeather saveOpenWeather(final OpenWeather openWeather){
-        return repository.save(openWeather);
+    public WeatherEntity saveOpenWeatherEntity(final WeatherEntity weatherEntity){
+        return repository.save(weatherEntity);
     }
 
-    public void deleteOpenWeather(final Long id){
+    public void deleteOpenWeatherEntity(final Long id){
         repository.deleteById(id);
     }
 
-    public void deleteAllOpenWeathers(){
+    public void deleteAllOpenWeathersEntity(){
         repository.deleteAll();
     }
 

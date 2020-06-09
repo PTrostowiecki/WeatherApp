@@ -1,9 +1,9 @@
 package com.myprivate.weatherapp.controller;
 
 import com.myprivate.weatherapp.client.WeatherClient;
-import com.myprivate.weatherapp.mapper.OpenWeatherMapper;
-import com.myprivate.weatherapp.model.OpenWeather;
-import com.myprivate.weatherapp.model.OpenWeatherDto;
+import com.myprivate.weatherapp.mapper.WeatherMapper;
+import com.myprivate.weatherapp.model.WeatherEntity;
+import com.myprivate.weatherapp.model.WeatherDto;
 import com.myprivate.weatherapp.repository.WeatherRepository;
 import com.myprivate.weatherapp.service.DataBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/forecast/")
-public class OpenWeatherController {
+public class WeatherController {
 
     @Autowired
     private WeatherRepository weatherRepository;
@@ -25,23 +25,23 @@ public class OpenWeatherController {
     private DataBaseService dataBaseService;
 
     @Autowired
-    private OpenWeatherMapper openWeatherMapper;
+    private WeatherMapper weatherMapper;
 
     @Autowired
     private WeatherClient weatherClient;
 
     @RequestMapping(method = RequestMethod.GET, value = "getweather")
-    public OpenWeatherDto getWeather(@RequestParam String city,
-                                     @RequestParam(required = false) String location,
-                                     @RequestParam(defaultValue = "metric", value = "temperatureUnits") String temperatureUnits){
-        OpenWeatherDto openWeatherDto = weatherClient.getForecast(city,location,temperatureUnits);
-        dataBaseService.saveOpenWeather(openWeatherMapper.mapToOpenWeather(openWeatherDto));
+    public WeatherDto getWeather(@RequestParam String city,
+                                 @RequestParam(required = false) String location,
+                                 @RequestParam(defaultValue = "metric", value = "temperatureUnits") String temperatureUnits){
+        WeatherDto weatherDto = weatherClient.getForecast(city,location,temperatureUnits);
+        dataBaseService.saveOpenWeatherEntity(weatherMapper.mapToOpenWeatherEntity(weatherDto));
 
-        return openWeatherDto;
+        return weatherDto;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getweatherlist")
-    public List<OpenWeather> getOpenWeatherList(){
+    public List<WeatherEntity> getWeatherList(){
         return  weatherRepository.findAll();
     }
 
